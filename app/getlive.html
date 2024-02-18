@@ -11,7 +11,7 @@ header("Access-Control-Expose-Headers: Content-Length,Content-Range");
 header("Access-Control-Allow-Headers: Range");
 header("Accept-Ranges: bytes");
 
-include "functions.php";
+include "functions.html";
 $cred = getCRED();
 $jio_cred = json_decode($cred, true);
 $ssoToken = $jio_cred['ssoToken'];
@@ -91,10 +91,10 @@ if (!empty($qid)) {
     $qw2 = explode("_", $qw1[0]);
     $qw = end($qw2);
     $pattern = "/{$chs[3]}_{$qw}-([^.]+\.)key/";
-    $replacement = "auth.php?key={$chs[3]}/{$chs[3]}_{$qw}-$1key&ck={$ency}";
+    $replacement = "auth.html?key={$chs[3]}/{$chs[3]}_{$qw}-$1key&ck={$ency}";
     $hs = preg_replace($pattern, $replacement, $hs);
     $pattern = "/{$chs[3]}_{$qw}-([^.]+\.)ts/";
-    $replacement = "auth.php?ts={$chs[3]}/{$chs[3]}_{$qw}-$1ts&ck={$ency}";
+    $replacement = "auth.html?ts={$chs[3]}/{$chs[3]}_{$qw}-$1ts&ck={$ency}";
     $hs = preg_replace($pattern, $replacement, $hs);
     $hs = str_replace("https://tv.media.jio.com/streams_live/{$chs[3]}/", "", $hs);
     echo $hs;
@@ -111,12 +111,12 @@ if (!empty($qid)) {
         }
     }
     foreach ($lived as $liv_v) {
-        $hs = str_replace("{$qc[0]}_{$liv_v}.ts", "auth.php?ts={$chs[3]}/{$chs[4]}/{$qc[0]}_{$liv_v}.ts&ck={$ency}", $hs);
+        $hs = str_replace("{$qc[0]}_{$liv_v}.ts", "auth.html?ts={$chs[3]}/{$chs[4]}/{$qc[0]}_{$liv_v}.ts&ck={$ency}", $hs);
     }
     $key_y = explode(',URI="', $hs);
     $key_t = explode('.key"', $key_y[1]);
     $key_new = str_replace("https://tv.media.jio.com/streams_live/", "", $key_t[0]);
-    $hs = str_replace("{$key_t[0]}.key", "auth.php?key={$key_new}.key&ck={$ency}", $hs);
+    $hs = str_replace("{$key_t[0]}.key", "auth.html?key={$key_new}.key&ck={$ency}", $hs);
     echo $hs;
 } else {
     echo "SOMETHING WENT WRONG";
