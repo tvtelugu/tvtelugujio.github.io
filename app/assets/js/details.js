@@ -7,16 +7,16 @@ Created By: TechieSneh
 */
 
 document.getElementById("refreshButton").addEventListener("click", function () {
-  window.location.href = "login/refreshLogin.php";
+  window.location.href = "login/refreshLogin.html";
 });
 
 document.getElementById("homeButton").addEventListener("click", function () {
-  window.location.href = "index.php";
+  window.location.href = "index.html";
 });
 
 document.getElementById("logoutButton").addEventListener("click", function () {
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", "login/logout.php", true);
+  xhr.open("POST", "login/logout.html", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       alert(xhr.responseText);
