@@ -54,7 +54,7 @@ $pg = $data[2];
   </header>
 
   <div id="jtvh1">
-    <a href="index.php">
+    <a href="index.html">
       <h1><?php echo $cid; ?></br>CATCHUP</h1>
     </a>
   </div>
@@ -110,7 +110,7 @@ $pg = $data[2];
     $end = get_T_time($catchupDataArr['epg'][$i]['endEpoch']);
 
     $data = $name . '=?=' . $id . '=?=' . $epiShowTime . '=?=' . $srno . '=?=' . $begin . '=?=' . $end;
-    $link = $jio_path . 'cplay.php?data=' . base64_encode($data);
+    $link = $jio_path . 'cplay.html?data=' . base64_encode($data);
 
     echo '<div class="movie_card" id="bright">
             <div class="info_section">
