@@ -5,7 +5,7 @@
 // * Created By : TechieSneh
 
 error_reporting(0);
-include "cpfunctions.php";
+include "cpfunctions.html";
 
 $cred = getCRED();
 $jio_cred = json_decode($cred, true);
@@ -56,12 +56,12 @@ if (@$_REQUEST["link"] != "" && @$_REQUEST["data"] != "") {
     $cx1 = stream_context_create($opts);
 
     $hs1 = file_get_contents($link . '/' . $data, false, $cx1);
-    $hs1 = @str_replace('sonyliv_', 'cpSonyAuth.php?id=' . $id . '&ck=' . $cookie . '&ts=' . $link . '/sonyliv_', $hs1);
+    $hs1 = @str_replace('sonyliv_', 'cpSonyAuth.html?id=' . $id . '&ck=' . $cookie . '&ts=' . $link . '/sonyliv_', $hs1);
 
     if (strpos($hs1, 'WL/') === false) {
-        $hs1 = @str_replace('movie_', 'cpSonyAuth.php?id=' . $id . '&ck=' . $cookie . '&ts=' . $link . '/movie_', $hs1);
+        $hs1 = @str_replace('movie_', 'cpSonyAuth.html?id=' . $id . '&ck=' . $cookie . '&ts=' . $link . '/movie_', $hs1);
     } else {
-        $hs1 = @str_replace('WL/', 'cpSonyAuth.php?id=' . $id . '&ck=' . $cookie . '&ts=' . $link . '/WL/', $hs1);
+        $hs1 = @str_replace('WL/', 'cpSonyAuth.html?id=' . $id . '&ck=' . $cookie . '&ts=' . $link . '/WL/', $hs1);
     }
 
     print($hs1);
