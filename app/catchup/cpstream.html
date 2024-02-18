@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Range");
 header("Accept-Ranges: bytes");
 
 
-include "cpfunctions.php";
+include "cpfunctions.html";
 $cred = getCRED();
 $jio_cred = json_decode($cred, true);
 $ssoToken = $jio_cred['ssoToken'];
@@ -53,8 +53,8 @@ if (@$_REQUEST["cid"] != "" && @$_REQUEST["ck"] != "") {
     $cx = stream_context_create($opts);
 
     $hs1 = file_get_contents("https://jiotvcod.cdn.jio.com/bpk-tv/" . $chs[0] . '/Catchup_Fallback/' . $seqq[0] . '?vbegin=' . $seq[1] . '&vend=' . $seq[2], false, $cx);
-    $hs1 = @str_replace('https://tv.media.jio.com/fallback/bpk-tv/', 'cpauth.php?ck=' . $cooks . '&pkey=', $hs1);
-    $hs1 = @str_replace($chs[0] . '-', 'cpauth.php?ck=' . $cooks . '&ts=' . $chs[0] . '/Catchup_Fallback/' . $chs[0] . '-', $hs1);
+    $hs1 = @str_replace('https://tv.media.jio.com/fallback/bpk-tv/', 'cpauth.html?ck=' . $cooks . '&pkey=', $hs1);
+    $hs1 = @str_replace($chs[0] . '-', 'cpauth.html?ck=' . $cooks . '&ts=' . $chs[0] . '/Catchup_Fallback/' . $chs[0] . '-', $hs1);
 
 
     print($hs1);
@@ -83,8 +83,8 @@ if (@$_REQUEST["sid"] != "" && @$_REQUEST["ck"] != "") {
     $cx1 = stream_context_create($opts11);
     $link = "https://jiotvmbcod.cdn.jio.com/" . $chs[0] . "/" . $chs[1] . "/" . $chs[2] . "?" . $cook;
     $hs1 = file_get_contents($link, false, $cx1);
-    $hs1 = @str_replace('https://tv.media.jio.com/streams_catchup/', 'cpauth.php?ck=' . $cooks . '&key=', $hs1);
-    $hs1 = @str_replace('https://jiotvmbcod.cdn.jio.com/', 'cpauth.php?ck=' . $cooks . '&tss=', $hs1);
+    $hs1 = @str_replace('https://tv.media.jio.com/streams_catchup/', 'cpauth.html?ck=' . $cooks . '&key=', $hs1);
+    $hs1 = @str_replace('https://jiotvmbcod.cdn.jio.com/', 'cpauth.html?ck=' . $cooks . '&tss=', $hs1);
 
     print_r($hs1);
 }
