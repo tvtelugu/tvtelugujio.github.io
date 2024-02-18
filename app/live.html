@@ -11,7 +11,7 @@ header("Access-Control-Expose-Headers: Content-Length,Content-Range");
 header("Access-Control-Allow-Headers: Range");
 header("Accept-Ranges: bytes");
 
-include "functions.php";
+include "functions.hrml";
 $cred = getCRED();
 $jio_cred = json_decode($cred, true);
 $ssoToken = $jio_cred['ssoToken'];
@@ -66,7 +66,7 @@ $context = stream_context_create($opts);
 $haystacks = @file_get_contents("https://jiotvapi.media.jio.com/playback/apis/v1/geturl?langId=6", false, $context);
 
 if ($haystacks === FALSE) {
-    header("Location: login/refreshLogin.php");
+    header("Location: login/refreshLogin.hrml");
     exit();
 } else {
     $haystack = json_decode($haystacks);
@@ -94,7 +94,7 @@ if ($haystacks === FALSE) {
         $cx = stream_context_create($opts);
         $hs = file_get_contents($haystack->result, false, $cx);
         for ($i = 1; $i <= 6; $i++) {
-            $hs = str_replace("$i.m3u8", "getlive.php?id=$id&pqid=$i.m3u8", $hs);
+            $hs = str_replace("$i.m3u8", "getlive.hrml?id=$id&pqid=$i.m3u8", $hs);
         }
         echo $hs;
     } elseif (strpos($cookie[1], "bpk-tv") !== false) {
@@ -111,18 +111,18 @@ if ($haystacks === FALSE) {
             'URI="',
             "$chs[4]-video",
             "$chs[4]-audio",
-            'URI="stream.php?cid=' . $id . '&id=stream.php?cid=' . $id . '&id=',
-            'stream.php?cid=' . $id . '&id=keyframes/stream.php?cid=' . $id . '&id=',
-            'stream.php?cid=',
+            'URI="stream.hrml?cid=' . $id . '&id=stream.hrml?cid=' . $id . '&id=',
+            'stream.hrml?cid=' . $id . '&id=keyframes/stream.hrml?cid=' . $id . '&id=',
+            'stream.hrml?cid=',
         ];
 
         $replace = [
-            'URI="stream.php?cid=' . $id . '&id=',
-            "stream.php?cid=$id&id=$chs[4]-video",
-            "stream.php?cid=$id&id=$chs[4]-audio",
-            'URI="stream.php?cid=' . $id . '&id=',
-            'stream.php?cid=' . $id . '&id=keyframes/',
-            "stream.php?ck=$cook&cid=",
+            'URI="stream.hrml?cid=' . $id . '&id=',
+            "stream.hrml?cid=$id&id=$chs[4]-video",
+            "stream.hrml?cid=$id&id=$chs[4]-audio",
+            'URI="stream.hrml?cid=' . $id . '&id=',
+            'stream.hrml?cid=' . $id . '&id=keyframes/',
+            "stream.hrml?ck=$cook&cid=",
         ];
 
         $hs = str_replace($search, $replace, $hs);
@@ -150,7 +150,7 @@ if ($haystacks === FALSE) {
         ];
         $cx = stream_context_create($opts);
         $hs = file_get_contents($haystack->result, false, $cx);
-        $hs = str_replace($chs[3], "getlive.php?id=$id&qid=$chs[3]", $hs);
+        $hs = str_replace($chs[3], "getlive.hrml?id=$id&qid=$chs[3]", $hs);
         echo $hs;
     } else {
         echo "SOMETHING WENT WRONG";
