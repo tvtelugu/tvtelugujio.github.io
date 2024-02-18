@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Range");
 header("Accept-Ranges: bytes");
 
 
-include "cpfunctions.php";
+include "cpfunctions.html";
 $cred = getCRED();
 $jio_cred = json_decode($cred, true);
 $ssoToken = $jio_cred['ssoToken'];
@@ -77,7 +77,7 @@ $context = stream_context_create($opts);
 $haystacks = @file_get_contents("https://jiotvapi.media.jio.com/playback/apis/v1/geturl?langId=6", false, $context);
 
 if ($haystacks === FALSE) {
-    header("Location: ../login/refreshLogin.php");
+    header("Location: ../login/refreshLogin.html");
     exit();
 } else {
     $haystack = json_decode($haystacks);
@@ -105,14 +105,14 @@ if ($haystacks === FALSE) {
         $opts = ["http" => ["method" => "GET", "header" => "User-Agent: plaYtv/7.0.5 (Linux;Android 8.1.0) ExoPlayerLib/2.11.7"]];
         $cx = stream_context_create($opts);
         $hs = file_get_contents($haystack->result, false, $cx);
-        $hs = @str_replace('URI="', 'URI="cpstream.php?cid=', $hs);
-        $hs = @str_replace($chs[4] . '-video', 'cpstream.php?cid=' . $chs[4] . '-video', $hs);
-        $hs = @str_replace($chs[4] . '-audio', 'cpstream.php?cid=' . $chs[4] . '-audio', $hs);
-        $hs = @str_replace('URI="cpstream.php?cid=cpstream.php?cid=', 'URI="cpstream.php?cid=', $hs);
-        $hs = @str_replace('cpstream.php?cid=keyframes/cpstream.php?cid=', 'cpstream.php?cid=keyframes/', $hs);
+        $hs = @str_replace('URI="', 'URI="cpstream.html?cid=', $hs);
+        $hs = @str_replace($chs[4] . '-video', 'cpstream.html?cid=' . $chs[4] . '-video', $hs);
+        $hs = @str_replace($chs[4] . '-audio', 'cpstream.html?cid=' . $chs[4] . '-audio', $hs);
+        $hs = @str_replace('URI="cpstream.html?cid=cpstream.html?cid=', 'URI="cpstream.html?cid=', $hs);
+        $hs = @str_replace('cpstream.html?cid=keyframes/cpstream.html?cid=', 'cpstream.html?cid=keyframes/', $hs);
         $hs = @str_replace('?vbegin=', '?vb=', $hs);
         $hs = @str_replace('&vend=', '=', $hs);
-        $hs = @str_replace('cpstream.php?cid=', 'cpstream.php?ck=' . $cook . '&cid=', $hs);
+        $hs = @str_replace('cpstream.html?cid=', 'cpstream.html?ck=' . $cook . '&cid=', $hs);
 
         print_r($hs);
     } elseif (strstr($cookie, "/HLS/") == True) {
@@ -122,7 +122,7 @@ if ($haystacks === FALSE) {
         $opts = ["http" => ["method" => "GET", "header" => "User-Agent: plaYtv/7.0.5 (Linux;Android 8.1.0) ExoPlayerLib/2.11.7"]];
         $cx = stream_context_create($opts);
         $hs = file_get_contents($haystack->result, false, $cx);
-        $hs = @str_replace($data[0], 'cpSonyAuth.php?id=' . $id . '&ck=' . $cook . '&link=' . $link . '&data=' . $data[0], $hs);
+        $hs = @str_replace($data[0], 'cpSonyAuth.html?id=' . $id . '&ck=' . $cook . '&link=' . $link . '&data=' . $data[0], $hs);
 
         print $hs;
     } elseif (strstr($cookie, "acl=/" . $chs[3] . "/") == True) {
@@ -130,7 +130,7 @@ if ($haystacks === FALSE) {
         $opts = ["http" => ["method" => "GET", "header" => "User-Agent: plaYtv/7.0.5 (Linux;Android 8.1.0) ExoPlayerLib/2.11.7"]];
         $cx = stream_context_create($opts);
         $hs = file_get_contents($haystack->result, false, $cx);
-        $hs = @str_replace('https://jiotvmbcod.cdn.jio.com/', 'cpstream.php?ck=' . $cook . '&sid=', $hs);
+        $hs = @str_replace('https://jiotvmbcod.cdn.jio.com/', 'cpstream.html?ck=' . $cook . '&sid=', $hs);
 
         print $hs;
     } else {
